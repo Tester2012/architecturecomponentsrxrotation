@@ -1,0 +1,20 @@
+ext.deps = [:]
+def versions = [:]
+versions.lifecycle = "1.1.1"
+versions.support = "26.1.0"
+versions.rx_android = "2.0.1"
+
+def support = [:]
+support.app_compat = "com.android.support:appcompat-v7:$versions.support"
+support.v4 = "com.android.support:support-v4:$versions.support"
+deps.support = support
+
+def lifecycle = [:]
+lifecycle.runtime = "android.arch.lifecycle:runtime:$versions.lifecycle"
+lifecycle.extensions = "android.arch.lifecycle:extensions:$versions.lifecycle"
+lifecycle.java8 = "android.arch.lifecycle:common-java8:$versions.lifecycle"
+lifecycle.compiler = "android.arch.lifecycle:compiler:$versions.lifecycle"
+deps.lifecycle = lifecycle
+
+def rxandroid = [:]
+deps.rx_android = "io.reactivex.rxjava2:rxandroid:$versions.rx_android"
