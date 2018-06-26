@@ -31,12 +31,9 @@ public class MainActivity extends AppCompatActivity {
         final RxViewModel model = ViewModelProviders.of(this, factory)
                 .get(RxViewModel.class);
         for (LiveData<String> liveData : model.getLiveDataList()) {
-            liveData.observe(this, new Observer<String>() {
-                @Override
-                public void onChanged(@Nullable String s) {
-                    String previousText = textView.getText().toString();
-                    textView.setText(previousText + " " + s);
-                }
+            liveData.observe(this, s -> {
+                String previousText = textView.getText().toString();
+                textView.setText(previousText + " " + s);
             });
         }
     }

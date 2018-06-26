@@ -13,12 +13,9 @@ import io.reactivex.schedulers.Schedulers;
 
 public class RxLiveData extends LiveData<String> {
     public RxLiveData(final int taskNumber) {
-        Observable<String> observable = Observable.defer(new Callable<ObservableSource<? extends String>>() {
-            @Override
-            public ObservableSource<? extends String> call() throws Exception {
-                SystemClock.sleep(2000);
-                return Observable.just("Task #" + taskNumber + " completed!");
-            }
+        Observable<String> observable = Observable.defer(() -> {
+            SystemClock.sleep(2000);
+            return Observable.just("Task #" + taskNumber + " completed!");
         });
 
         observable.subscribeOn(Schedulers.io())
