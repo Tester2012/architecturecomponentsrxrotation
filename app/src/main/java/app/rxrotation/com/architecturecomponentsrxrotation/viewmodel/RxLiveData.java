@@ -8,18 +8,21 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DefaultObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class RxLiveData extends LiveData<String> {
+public class RxLiveData extends LiveData<User> {
     public RxLiveData(String args) {
-        Observable<String> observable = Observable.defer(() -> {
-            SystemClock.sleep(2000);
-            return Observable.just("Task " + args + " completed!");
+        Observable<User> observable = Observable.defer(() -> {
+            SystemClock.sleep(10000);
+            User user = new User();
+            user.setFirstName("John");
+            user.setLastName("Smith");
+            return Observable.just(user);
         });
 
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DefaultObserver<String>() {
+                .subscribeWith(new DefaultObserver<User>() {
                     @Override
-                    public void onNext(String value) {
+                    public void onNext(User value) {
                         setValue(value);
                     }
 

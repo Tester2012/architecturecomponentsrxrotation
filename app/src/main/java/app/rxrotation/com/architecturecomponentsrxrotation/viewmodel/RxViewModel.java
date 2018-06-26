@@ -6,13 +6,13 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
 public class RxViewModel extends ViewModel {
-    private final LiveData<String> liveData;
+    private final LiveData<User> liveData;
 
     public RxViewModel() {
         liveData = new RxLiveData("");
     }
 
-    public LiveData<String> getLiveData() {
+    public LiveData<User> getLiveData() {
         return liveData;
     }
 
