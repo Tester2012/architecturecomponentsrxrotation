@@ -5,21 +5,15 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class RxViewModel extends ViewModel {
-    private final List<LiveData<String>> liveDataList = new ArrayList<>();
+    private final LiveData<String> liveData;
 
     public RxViewModel() {
-        for (int i = 0; i < 10; i++) {
-            RxLiveData rxLiveData = new RxLiveData(i);
-            liveDataList.add(rxLiveData);
-        }
+        liveData = new RxLiveData("");
     }
 
-    public List<LiveData<String>> getLiveDataList() {
-        return liveDataList;
+    public LiveData<String> getLiveData() {
+        return liveData;
     }
 
     public static class RxViewModelFactory extends ViewModelProvider.NewInstanceFactory {
