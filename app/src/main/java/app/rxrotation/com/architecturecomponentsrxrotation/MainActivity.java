@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
                 R.layout.activity_main);
         mainBinding.setLifecycleOwner(this);
 
-        RxViewModel.RxViewModelFactory factory = new RxViewModel.RxViewModelFactory();
+        String[] someRags = new String[] {"arg1", "arg2"};
+        RxViewModel.RxViewModelFactory factory = new RxViewModel.RxViewModelFactory(someRags);
         final RxViewModel model = ViewModelProviders.of(this, factory)
                 .get(RxViewModel.class);
         LiveData<User> liveData = model.getLiveData();

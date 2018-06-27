@@ -8,8 +8,8 @@ import android.support.annotation.NonNull;
 public class RxViewModel extends ViewModel {
     private final LiveData<User> liveData;
 
-    public RxViewModel() {
-        liveData = new RxLiveData("");
+    public RxViewModel(String... someArgs) {
+        liveData = new RxLiveData(someArgs);
     }
 
     public LiveData<User> getLiveData() {
@@ -17,10 +17,16 @@ public class RxViewModel extends ViewModel {
     }
 
     public static class RxViewModelFactory extends ViewModelProvider.NewInstanceFactory {
+        private String[] someArgs;
+
+        public RxViewModelFactory(String... someArgs) {
+            this.someArgs = someArgs;
+        }
+
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            return (T) new RxViewModel();
+            return (T) new RxViewModel(someArgs);
         }
     }
 }
