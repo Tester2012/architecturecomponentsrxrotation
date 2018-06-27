@@ -22,6 +22,12 @@
             android:inputType="textPersonName"
             android:text="@={user.lastName}"/>
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/load_button"
+            android:text="Load"/>
+
     </LinearLayout>
 
 </layout>

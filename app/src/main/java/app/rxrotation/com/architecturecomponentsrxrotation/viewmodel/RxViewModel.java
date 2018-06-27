@@ -1,19 +1,25 @@
 package app.rxrotation.com.architecturecomponentsrxrotation.viewmodel;
 
-import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
 public class RxViewModel extends ViewModel {
-    private final LiveData<User> liveData;
+    private RxLiveData liveData;
 
     public RxViewModel(String... someArgs) {
-        liveData = new RxLiveData(someArgs);
+        initLiveData(someArgs);
     }
 
-    public LiveData<User> getLiveData() {
-        return liveData;
+    public void observeRxLiveDate(LifecycleOwner owner,
+                                  Observer<User> observer) {
+        liveData.observe(owner, observer);
+    }
+
+    public void initLiveData(String... someArgs) {
+        liveData = new RxLiveData(someArgs);
     }
 
     public static class RxViewModelFactory extends ViewModelProvider.NewInstanceFactory {
