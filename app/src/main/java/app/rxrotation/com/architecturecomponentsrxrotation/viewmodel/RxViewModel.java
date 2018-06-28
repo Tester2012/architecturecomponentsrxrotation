@@ -9,13 +9,15 @@ import android.support.annotation.NonNull;
 public class RxViewModel extends ViewModel {
     private RxLiveData liveData;
 
-    public RxViewModel(String... someArgs) {
-        initLiveData(someArgs);
-    }
-
     public void observeRxLiveDate(LifecycleOwner owner,
                                   Observer<User> observer) {
-        liveData.observe(owner, observer);
+        if (liveData != null) {
+            liveData.observe(owner, observer);
+        }
+    }
+
+    public boolean hasLiveData() {
+        return liveData != null;
     }
 
     public void initLiveData(String... someArgs) {
@@ -32,7 +34,7 @@ public class RxViewModel extends ViewModel {
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            return (T) new RxViewModel(someArgs);
+            return (T) new RxViewModel();
         }
     }
 }

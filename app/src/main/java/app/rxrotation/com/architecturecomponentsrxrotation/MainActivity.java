@@ -38,10 +38,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void observeLiveData() {
-        progressDialog.show();
-        viewModel.observeRxLiveDate(this, user -> {
-            progressDialog.dismiss();
-            mainBinding.setUser(user);
-        });
+        if (viewModel.hasLiveData()) {
+            progressDialog.show();
+            progressDialog.setCanceledOnTouchOutside(false);
+            viewModel.observeRxLiveDate(this, user -> {
+                progressDialog.dismiss();
+                mainBinding.setUser(user);
+            });
+        }
     }
 }
