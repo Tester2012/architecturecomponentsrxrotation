@@ -9,7 +9,11 @@ import io.reactivex.observers.DefaultObserver;
 import io.reactivex.schedulers.Schedulers;
 
 public class RxLiveData extends LiveData<User> {
-    public RxLiveData(String... someArgs) {
+    public RxLiveData() {
+        setValue(new User());
+    }
+
+    public RxLiveData(String args) {
         Observable<User> observable = Observable.defer(() -> {
             SystemClock.sleep(10000);
             User user = new User();

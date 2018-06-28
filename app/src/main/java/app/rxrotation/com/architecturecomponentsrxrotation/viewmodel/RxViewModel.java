@@ -9,18 +9,16 @@ import android.support.annotation.NonNull;
 public class RxViewModel extends ViewModel {
     private RxLiveData liveData;
 
+    public RxViewModel() {
+        liveData = new RxLiveData();
+    }
+
     public void observeRxLiveDate(LifecycleOwner owner,
                                   Observer<User> observer) {
-        if (liveData != null) {
-            liveData.observe(owner, observer);
-        }
+        liveData.observe(owner, observer);
     }
 
-    public boolean hasLiveData() {
-        return liveData != null;
-    }
-
-    public void initLiveData(String... someArgs) {
+    public void initLiveData(String someArgs) {
         liveData = new RxLiveData(someArgs);
     }
 

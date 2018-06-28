@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import app.rxrotation.com.architecturecomponentsrxrotation.databinding.ActivityMainBinding;
 import app.rxrotation.com.architecturecomponentsrxrotation.viewmodel.RxViewModel;
+import app.rxrotation.com.architecturecomponentsrxrotation.viewmodel.User;
 
 public class MainActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
@@ -25,26 +26,23 @@ public class MainActivity extends AppCompatActivity {
                 R.layout.activity_main);
         mainBinding.setLifecycleOwner(this);
 
-        String[] someRags = new String[] {"arg1", "arg2"};
-        RxViewModel.RxViewModelFactory factory = new RxViewModel.RxViewModelFactory(someRags);
+        RxViewModel.RxViewModelFactory factory = new RxViewModel.RxViewModelFactory("");
         viewModel = ViewModelProviders.of(this, factory)
                 .get(RxViewModel.class);
 
         observeLiveData();
         findViewById(R.id.load_button).setOnClickListener(v -> {
-            viewModel.initLiveData();
+            viewModel.initLiveData("");
             observeLiveData();
         });
     }
 
     private void observeLiveData() {
-        if (viewModel.hasLiveData()) {
-            progressDialog.show();
-            progressDialog.setCanceledOnTouchOutside(false);
-            viewModel.observeRxLiveDate(this, user -> {
-                progressDialog.dismiss();
-                mainBinding.setUser(user);
-            });
-        }
+        progressDialog.show();
+        progressDialog.setCanceledOnTouchOutside(false);
+        viewModel.observeRxLiveDate(this, user -> {
+            progressDialog.dismiss();
+            mainBinding.setUser(user);
+        });
     }
 }
