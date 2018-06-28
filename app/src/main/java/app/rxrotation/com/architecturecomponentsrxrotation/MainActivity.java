@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import app.rxrotation.com.architecturecomponentsrxrotation.databinding.ActivityMainBinding;
 import app.rxrotation.com.architecturecomponentsrxrotation.viewmodel.RxViewModel;
-import app.rxrotation.com.architecturecomponentsrxrotation.viewmodel.User;
 
 public class MainActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
@@ -31,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
                 .get(RxViewModel.class);
 
         observeLiveData();
-        findViewById(R.id.load_button).setOnClickListener(v -> {
+        mainBinding.loadButton.setOnClickListener(v -> {
             viewModel.initLiveData("");
             observeLiveData();
         });
